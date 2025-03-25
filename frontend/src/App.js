@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { RequestService } from './services/RequestService';
 
 function App() {
+  const service = new RequestService();
+  
+  const [event, setEvent] = useState(false);
+  const [eventData, setEventData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
@@ -34,27 +38,48 @@ function App() {
     try {
       console.log("Submitted form data with:", formData);
       setLoading(true);
+      await service.postEvent();
+      const get = await service.getEvent();
+      setLoading(false);
+      setEvent(true);
+      setEventData(get);
     } catch (err) {
-      setError(err);
+      setLoading(false);
+      setError(err.message);
     }
   };
+
+  if (event && eventData) {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h2>Event Details: {}</h2>
+          <h3>Venue: {eventData.venue}</h3>
+          <h3>Todos:</h3>
+          <ul>
+            {eventData.todos.map((todo, idx) => (
+              <li key={idx}>{todo}</li>
+            ))}
+          </ul>
+          <h3>Purchasables:</h3>
+          <ul>
+            {eventData.purchasables.map((item, idx) => (
+              <li key={idx}>{item.item} - ${item.price}</li>
+            ))}
+          </ul>
+        </header>
+      </div>
+    )
+  }
 
   if (loading) {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Edit <code>src/App.js</code> and save to reload.
+            Please wait while we create an event plan...
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <div className="spinner"></div>
         </header>
       </div>
     )
@@ -64,7 +89,8 @@ function App() {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>Error: {error}</h1>
+          <h2>An error has occurred:</h2>
+          <h2>{error}</h2>
         </header>
       </div>
     )
