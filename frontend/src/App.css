@@ -13,15 +13,17 @@
   }
 }
 
+/* @import "tailwindcss"; */
+
 .App-header {
-  background-color: #282c34;
+  background-color: #ffffff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
 .App-link {
@@ -35,6 +37,143 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Event Page Styling */
+.event {
+  text-align: center;
+}
+
+.event-header {
+  background-color: #ffffff;
+  min-height: 100vh;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 100px;
+  gap: 10%;
+}
+
+.event-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 5%;
+}
+
+.event-details {
+  width: 100%;
+  height: 450px;
+  max-height: 450px;
+
+  /* border-style: solid;
+  border-width: 4px;
+  border-color: white; */
+  border-radius: 20px;
+
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-around; */
+
+  /* align-content: left; */
+
+  background-color: #697489;
+  background: rgba(0, 0, 0, 0.25);
+
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Floating shadow */
+
+  overflow-y: scroll;
+}
+
+.event-progress-info {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-around; */
+
+  width: 100%;
+  height: 450px;
+
+  /* border-style: solid;
+  border-width: 4px;
+  border-color: white; */
+  border-radius: 20px;
+
+  background-color: #697489;
+  background: rgba(0, 0, 0, 0.25);
+
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Floating shadow */
+}
+
+.event-progress-container {
+  width: 75%;
+  height: 20px;
+  background: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px auto;
+}
+
+.event-progress-bar {
+  height: 100%;
+  background: #4CAF50;
+  transition: width 0.3s ease-in-out;
+}
+
+.event-bot {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 5%;
+}
+
+.event-todos {
+  width: 100%;
+  height: 450px;
+  max-height: 450px;
+
+  border-radius: 20px;
+
+  background-color: #697489;
+  background-color: rgba(0,0,0,0.25);
+
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.event-todo-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.event-todo-list label {
+  display: block;
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.event-todo-list input[type="checkbox"] {
+  border-radius: 100px;
+}
+
+.event-purchasables {
+  width: 100%;
+  height: 450px;
+  max-height: 450px;
+
+  border-radius: 20px;
+
+  background-color: #697489;
+  background-color: rgba(0,0,0,0.25);
+
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Loading Screen Styling */

@@ -6,6 +6,8 @@ export class RequestService {
                 
                 setTimeout(() => {
                     resolve({
+                        eventId: 1,
+                        eventName: "Beach Party",
                         venue: "The Beach",
                         todos: ["Get food", "Get drinks", "Get decorations"],
                         purchasables: [
@@ -28,7 +30,10 @@ export class RequestService {
                 // TODO: Replace with actual POST request using fetch or axios to cloud backend
 
                 setTimeout(() => {
-                    resolve("Successfully posted event data");
+                    resolve({
+                        eventId: 1,
+                        message: "Successfully posted event data"
+                    });
                 }, 2000);
             } catch (error) {
                 reject(new Error(error));
