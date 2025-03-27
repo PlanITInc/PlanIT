@@ -1,4 +1,5 @@
 const { MongoClient } = require('mongodb');
+// import { MongoClient } from 'mongodb';
 
 const uri = process.env.COSMOS_DB_CONNECTION_STRING;
 

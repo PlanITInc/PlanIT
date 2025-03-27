@@ -1,9 +1,9 @@
-const { Configuration, OpenAIApi } = require("openai");
+const OpenAI = require("openai");
+// import OpenAI from 'openai';
 
-const configuration = new Configuration({
-    apiKey: "",
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApoi(configuration);
 
 async function generateEventPlan(eventDetails) {
     const prompt = `
@@ -19,7 +19,7 @@ async function generateEventPlan(eventDetails) {
     - Ideal venue (with price if applicable)
     - Purchasables (each item/thing with a price, e.g., drinks, food, clown, photographer, etc.)
     - TODO List (ordered by priority, e.g., setting up balloons, table setup, chairs, etc.)
-    - Email to send to participants (optional)
+    - Email to send to participants
     - Budget total
     
     use the following example layout for the event plan:
@@ -30,17 +30,22 @@ async function generateEventPlan(eventDetails) {
     `;
 
     try {
-        const response = await openai.createCompletion({
+        console.log("Generating event plan");
+        const response = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
-            prompt: prompt,
-            max_tokens: 1500,
+            messages: [
+                { role: "system", content: "You are an event planner." },
+                { role: "user", content: prompt },
+            ],
+            max_tokens: 1000,
             temperature: 0.7,
         });
-
-        const eventPlanText = response.data.choices[0].text.trim();
+        const eventPlanText = response.choices[0].message.content.trim();
         
         // Parse the response text into an object
+        console.log("Generated event plan:", eventPlanText);
         const eventPlan = parseEventPlan(eventPlanText);
+        console.log("Parsed event plan:", eventPlan);
         return eventPlan;
     } catch (error) {
         console.error("Failed to generate event plan", error);
@@ -54,31 +59,44 @@ function parseEventPlan(eventPlanText) {
         Venue: '',
         Todos: [],
         Purchasables: [],
-        Budget: 0
+        Budget: 0,
+        Email: '' // Initialize Email as a string
     };
 
     let currentSection = '';
 
     lines.forEach(line => {
-        if (line.startsWith('- Ideal venue')) {
+        if (line.startsWith('Venue:')) {
             currentSection = 'Venue';
-            eventPlan.Venue = line.replace('- Ideal venue:', '').trim();
-        } else if (line.startsWith('- Purchasables')) {
+            eventPlan.Venue = line.replace('Venue:', '').trim();
+        } else if (line.startsWith('Purchasables:')) {
             currentSection = 'Purchasables';
-        } else if (line.startsWith('- TODO List')) {
+        } else if (line.startsWith('TODO List:')) {
             currentSection = 'Todos';
-        } else if (line.startsWith('- Budget total')) {
+        } else if (line.startsWith('Budget Total: ')) {
             currentSection = 'Budget';
-            eventPlan.Budget = parseFloat(line.replace('- Budget total:', '').trim().replace('$', ''));
+            eventPlan.Budget = parseFloat(line.replace('Budget Total:', '').trim().replace('$', ''));
+        } else if (line.startsWith('Budget:')) {  
+            currentSection = 'Budget';
+            eventPlan.Budget = parseFloat(line.replace('Budget:', '').trim().replace('$', '')); 
+        } else if (line.startsWith('Email to Participants:')) {
+            currentSection = 'Email';
         } else {
             if (currentSection === 'Purchasables') {
                 const [item, price] = line.split(':').map(part => part.trim());
                 eventPlan.Purchasables.push({ item, price: parseFloat(price.replace('$', '')) });
             } else if (currentSection === 'Todos') {
                 eventPlan.Todos.push(line);
+            } else if (currentSection === 'Email') {
+                // Append lines to the Email string, preserving formatting
+                eventPlan.Email += (eventPlan.Email ? '\n' : '') + line;
             }
         }
     });
 
     return eventPlan;
 }
+
+module.exports = {
+    generateEventPlan,
+};

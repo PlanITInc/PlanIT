@@ -1,7 +1,11 @@
 const { app } = require('@azure/functions');
 const cosmosHandler = require('../helpers/cosmos-handler');
-// const gptHandler = require('../helpers/gpt-handler');
+const gptHandler = require('../helpers/gpt-handler');
 const crypto = require('crypto');
+// import app from '@azure/functions';
+// import cosmosHandler from '../helpers/cosmos-handler';
+// import gptHandler from '../helpers/gpt-handler';
+// import crypto from 'crypto';
 
 app.http('event', {
     methods: ['GET', 'POST'],
@@ -28,7 +32,7 @@ app.http('event', {
             let eventDetails = await request.json();
             console.log("Event details:", eventDetails);
             eventDetails.eventId = crypto.randomBytes(32).toString('hex');
-            // const eventPlan = await gptHandler.generateEventPlan(eventDetails);
+            const eventPlan = await gptHandler.generateEventPlan(eventDetails);
             await cosmosHandler.connect();
             const database = 'planit-db';
             const collection = 'event-collection';
