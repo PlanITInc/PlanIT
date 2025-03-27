@@ -13,7 +13,6 @@ async function generateEventPlan(eventDetails) {
     Budget: ${eventDetails.budget}
     Location: ${eventDetails.location}
     Description: ${eventDetails.description}
-    Inspiration images: ${eventDetails.inspirationImages}
     Estimated number of participants: ${eventDetails.participants}
     
     The event plan should include:
@@ -83,7 +82,3 @@ function parseEventPlan(eventPlanText) {
 
     return eventPlan;
 }
-
-module.exports = {
-    generateEventPlan,
-};
