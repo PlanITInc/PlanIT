@@ -1,9 +1,9 @@
 const { Configuration, OpenAIApi } = require("openai");
 
 const configuration = new Configuration({
-    apiKey: "",
+    apiKey: process.env.OPENAI_API_KEY
 });
-const openai = new OpenAIApoi(configuration);
+const openai = new OpenAIApi(configuration);
 
 async function generateEventPlan(eventDetails) {
     const prompt = `

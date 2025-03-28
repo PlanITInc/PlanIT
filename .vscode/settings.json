@@ -1,5 +1,5 @@
 {
-    "azureFunctions.deploySubpath": ".",
+    "azureFunctions.deploySubpath": "cloud",
     "azureFunctions.postDeployTask": "npm install (functions)",
     "azureFunctions.projectLanguage": "JavaScript",
     "azureFunctions.projectRuntime": "~4",
