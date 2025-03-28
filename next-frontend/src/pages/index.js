@@ -73,8 +73,8 @@ export default function Home() {
   }
 
   if (eventData) {
-    const todos = eventData.todos;
-    const purchasables = eventData.purchasables;
+    const todos = eventData.eventPlan.todos;
+    const purchasables = eventData.eventPlan.purchasables;
 
     const handleCheckTodos = (event, index) => {
       const newCheckedTodos = event.target.checked ? [...checkedTodos, index] : checkedTodos.filter((item) => item !== index);
@@ -82,7 +82,7 @@ export default function Home() {
     }
 
     const handleCheckPurchasables = (event, index) => {
-      const purchasable = eventData.purchasables[index];
+      const purchasable = eventData.eventPlan.purchasables[index];
       const isChecked = event.target.checked;
 
       if (isChecked) {
@@ -103,7 +103,7 @@ export default function Home() {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-black">{eventData.eventName} Event</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-black">{eventData.eventPlan.eventName} Event</h1>
             <p className="text-gray-500">Annual summer celebration at Sunset Beach</p>
           </div>
           <div className="flex items-center gap-2">
@@ -120,19 +120,19 @@ export default function Home() {
             <ul className="space-y-4">
               <li className="flex items-center gap-2">
                 <span className="text-gray-500">📅</span>
-                <span className="text-black">{eventData.date}</span>
+                <span className="text-black">{eventData.eventPlan.date}</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-gray-500">📍</span>
-                <span className="text-black">{eventData.venue}</span>
+                <span className="text-black">{eventData.eventPlan.venue}</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-gray-500">👥</span>
-                <span className="text-black">Expected Attendance: {eventData.participants}</span>
+                <span className="text-black">Expected Attendance: {eventData.eventPlan.participants}</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-gray-500">💰</span>
-                <span className="text-black">Budget: ${eventData.budget} (Spent: ${totalSpent.toFixed(1)})</span>
+                <span className="text-black">Budget: ${eventData.eventPlan.budget} (Spent: ${totalSpent.toFixed(1)})</span>
               </li>
             </ul>
           </div>
@@ -169,7 +169,7 @@ export default function Home() {
           <h2 className="text-xl font-bold mb-4 text-black">To-Do List</h2>
           {/* <p className="text-gray-500 mb-2">15 of 20 tasks completed</p> */}
           <ul className="space-y-2">
-            {eventData.todos.map((todo, index) => (
+            {eventData.eventPlan.todos.map((todo, index) => (
               <li className="flex items-center gap-2">
                 <input 
                   type="checkbox" 
@@ -187,7 +187,7 @@ export default function Home() {
         <div className="p-6 bg-white shadow rounded-lg mb-6">
           <h2 className="text-xl font-bold mb-4 text-black">Purchasables List</h2>
           <ul className="space-y-2">
-            {eventData.purchasables.map((purchasable, index) => (
+            {eventData.eventPlan.purchasables.map((purchasable, index) => (
               <li className="flex items-center justify-between">
                 <div className="flex items-center justify-between gap-2">
                   <input 
