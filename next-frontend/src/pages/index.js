@@ -103,8 +103,8 @@ export default function Home() {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-black">{eventData.eventPlan.eventName} Event</h1>
-            <p className="text-gray-500">Annual summer celebration at Sunset Beach</p>
+            <h1 className="text-3xl font-bold tracking-tight text-white">{eventData.eventPlan.title}</h1>
+            <p className="text-white-500">{eventData.eventPlan.miniDescription}</p>
           </div>
           <div className="flex items-center gap-2">
             {/* <span className="px-3 py-1 bg-gray-200 text-gray-700 rounded-full">In Progress</span>
@@ -120,7 +120,7 @@ export default function Home() {
             <ul className="space-y-4">
               <li className="flex items-center gap-2">
                 <span className="text-gray-500">📅</span>
-                <span className="text-black">{eventData.eventPlan.date}</span>
+                <span className="text-black">{eventData.date}</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-gray-500">📍</span>
@@ -128,7 +128,7 @@ export default function Home() {
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-gray-500">👥</span>
-                <span className="text-black">Expected Attendance: {eventData.eventPlan.participants}</span>
+                <span className="text-black">Expected Attendance: {eventData.participants}</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-gray-500">💰</span>
