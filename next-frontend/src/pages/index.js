@@ -103,8 +103,8 @@ export default function Home() {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-white">{eventData.eventPlan.title}</h1>
-            <p className="text-white-500">{eventData.eventPlan.miniDescription}</p>
+            <h1 className="text-3xl font-bold tracking-tight text-black">{eventData.eventPlan.title}</h1>
+            <p className="text-gray-500">{eventData.eventPlan.miniDescription}</p>
           </div>
           <div className="flex items-center gap-2">
             {/* <span className="px-3 py-1 bg-gray-200 text-gray-700 rounded-full">In Progress</span>
@@ -145,19 +145,19 @@ export default function Home() {
               <div>
                 <label className="text-gray-700">Overall Progress</label>
                 <div className="w-full bg-gray-200 rounded-full h-4">
-                  <div className="bg-black h-4 rounded-full" style={{ width: `${totalProgressPercentage}%` }}></div>
+                  <div className="bg-black h-4 rounded-full transition-width duration-300 ease-in-out" style={{ width: `${totalProgressPercentage}%` }}></div>
                 </div>
               </div>
               <div>
                 <label className="text-gray-700">Todo Progress</label>
                 <div className="w-full bg-gray-200 rounded-full h-4">
-                  <div className="bg-black h-4 rounded-full" style={{ width: `${todoProgressPercentage}%` }}></div>
+                  <div className="bg-black h-4 rounded-full transition-all duration-300 ease-in-out" style={{ width: `${todoProgressPercentage}%` }}></div>
                 </div>
               </div>
               <div>
                 <label className="text-gray-700">Purchasables Progress</label>
                 <div className="w-full bg-gray-200 rounded-full h-4">
-                  <div className="bg-black h-4 rounded-full" style={{ width: `${purchasablesProgressPercentage}%` }}></div>
+                  <div className="bg-black h-4 rounded-full transition-all duration-300 ease-in-out" style={{ width: `${purchasablesProgressPercentage}%` }}></div>
                 </div>
               </div>
             </div>
