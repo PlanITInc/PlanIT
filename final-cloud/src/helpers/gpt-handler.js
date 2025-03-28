@@ -13,6 +13,7 @@ async function generateEventPlan(eventDetails) {
     Budget: ${eventDetails.budget}
     Location: ${eventDetails.location}
     Description: ${eventDetails.description}
+    Inspiration Image Descriptions and Colors: ${eventDetails.inspirationImageDescriptions.map((desc) => JSON.stringify(desc.description)).join(", ")}
     Estimated number of participants: ${eventDetails.participants}
     
     The event plan should include:
@@ -20,8 +21,8 @@ async function generateEventPlan(eventDetails) {
     - Mini description of event
     - Ideal venue (with price if applicable)
     - Purchasables (each item/thing with a price, e.g., drinks, food, clown, photographer, etc.)
-    - TODO List (ordered by priority, e.g., setting up balloons, table setup, chairs, etc.)
-    - Email to send to participants
+    - TODO List (ordered by task that should be done earliest, e.g., reserve venue, hire clown, table setup, chairs, etc.)
+    - Full email to send to participants. Include greetings, event details, and RSVP instructions.
     - Budget total
     
     use the following example layout for the event plan. Make it into a JSON object so it can be easily parsed in javascript. Ensure there is no unexpected token in json at position 0 error:

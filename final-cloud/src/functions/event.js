@@ -2,8 +2,8 @@ const { app } = require('@azure/functions');
 const cosmosHandler = require('../helpers/cosmos-handler');
 const gptHandler = require('../helpers/gpt-handler');
 const blobHandler = require('../helpers/blob-handler');
+const computerVisionHandler = require('../helpers/computer-vision-handler');
 const crypto = require('crypto');
-const { parse } = require('parse-multipart-data');
 
 app.http('event', {
     methods: ['GET', 'POST'],
@@ -63,6 +63,8 @@ app.http('event', {
                     uploadedImageUrls = await blobHandler.uploadImagesToBlob(inspirationImages);
                 }
                 eventDetails.inspirationImages = uploadedImageUrls;
+
+                eventDetails.inspirationImageDescriptions = await computerVisionHandler.processImages(uploadedImageUrls);
 
                 // Generate event plan using GPT handler
                 const eventPlan = await gptHandler.generateEventPlan(eventDetails);
