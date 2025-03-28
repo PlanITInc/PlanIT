@@ -16,6 +16,8 @@ async function generateEventPlan(eventDetails) {
     Estimated number of participants: ${eventDetails.participants}
     
     The event plan should include:
+    - Title of event
+    - Mini description of event
     - Ideal venue (with price if applicable)
     - Purchasables (each item/thing with a price, e.g., drinks, food, clown, photographer, etc.)
     - TODO List (ordered by priority, e.g., setting up balloons, table setup, chairs, etc.)
@@ -24,6 +26,8 @@ async function generateEventPlan(eventDetails) {
     
     use the following example layout for the event plan. Make it into a JSON object so it can be easily parsed in javascript. Ensure there is no unexpected token in json at position 0 error:
     {
+        title: "Dance Party",
+        miniDescription: "A fun-filled evening of dancing and socializing.",
         venue: "Grand Ballroom",
         purchasables: [{ item: "Drinks", price: 500 }, { item: "Food", price: 1500 }],
         todos: ["Set up balloons", "Arrange tables", "Prepare sound system"],
